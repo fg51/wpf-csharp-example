@@ -1,28 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+//using System.Windows.Controls;
+//using System.Windows.Data;
+//using System.Windows.Documents;
+//using System.Windows.Input;
+//using System.Windows.Media;
+//using System.Windows.Media.Imaging;
+//using System.Windows.Navigation;
+//using System.Windows.Shapes;
+
+using wpfapp.Models;
+using wpfapp.ViewModels;
 
 namespace wpfapp
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+  /// <summary>
+  /// Interaction logic for MainWindow.xaml
+  /// </summary>
+  public partial class MainWindow : Window
+  {
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+      InitializeComponent();
+
+      // connect View and ViewModel
+      MainWindowVM vm = new MainWindowVM();
+
+
+      // initialize
+      //vm.UserList.Add(new User() { Id = 1, FirstName = "Apple", LastName = "Xis" });
+      vm.UserList.Add(new User(1, "Apple", "Xis"));
+      vm.UserList.Add(new User(2, "Banana", "Yis"));
+      this.DataContext = vm;
     }
+  }
 }
