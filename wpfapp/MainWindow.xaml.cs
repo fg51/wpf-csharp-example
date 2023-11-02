@@ -1,9 +1,9 @@
-using System;
+//using System;
 //using System.Collections.Generic;
 //using System.Linq;
 //using System.Text;
 //using System.Threading.Tasks;
-using System.Windows;
+using Win = System.Windows;
 //using System.Windows.Controls;
 //using System.Windows.Data;
 //using System.Windows.Documents;
@@ -16,19 +16,25 @@ using System.Windows;
 using wpfapp.Models;
 using wpfapp.ViewModels;
 
+namespace System.Runtime.CompilerServices
+{
+  internal static class IsExternalInit { }
+}
+
 namespace wpfapp
 {
   /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
-  public partial class MainWindow : Window
+  public partial class MainWindow : Win::Window
   {
     public MainWindow()
     {
-      InitializeComponent();
+      //InitializeComponent();  // created via designer form
 
       // connect View and ViewModel
-      MainWindowVM vm = new MainWindowVM();
+      //MainWindowVM vm = new MainWindowVM();
+      var vm = new MainWindowVM();
 
 
       // initialize

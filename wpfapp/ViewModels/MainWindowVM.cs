@@ -1,6 +1,7 @@
 //using System;
 //using System.Collections.Generic;
-using System.Collections.ObjectModel;
+//using System.Collections.ObjectModel;
+using Obj = System.Collections.ObjectModel;
 //using System.ComponentModel;
 //using System.Linq;
 //using System.Text;
@@ -12,9 +13,9 @@ namespace wpfapp.ViewModels
 {
   public class MainWindowVM
   {
-    public static ObservableCollection<User>? userList { get; set; }
+    public static Obj::ObservableCollection<User>? userList { get; set; }
 
-    public ObservableCollection<User> UserList
+    public Obj::ObservableCollection<User> UserList
     {
 #pragma warning disable CS8603
       get => userList;
@@ -27,7 +28,7 @@ namespace wpfapp.ViewModels
 
     public MainWindowVM()
     {
-      userList = new ObservableCollection<User>();
+      userList = new Obj::ObservableCollection<User>();
     }
   }
 }
