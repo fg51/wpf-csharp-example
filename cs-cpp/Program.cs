@@ -16,28 +16,35 @@ void ShowArray(in string name, in int[] xs)
 
 
 [IS.DllImport("native", EntryPoint = "add", CallingConvention = IS.CallingConvention.Cdecl, ExactSpelling = true)]
-static extern void add(int[] xs, int[] ys);
+static extern void add(IntPtr xs, IntPtr ys);
+//static extern void add(IntPtr xs, int[] ys);
+//static extern void add(int[] xs, int[] ys);
+
+
+void CallCppFunction(in int[] xs, int[] ys)
+{
+
+  // protect gc
+  System.IntPtr ptrx = IS.Marshal.AllocCoTaskMem(IS.Marshal.SizeOf(typeof(int)) * xs.Length);
+  System.IntPtr ptry = IS.Marshal.AllocCoTaskMem(IS.Marshal.SizeOf(typeof(int)) * ys.Length);
+
+  IS.Marshal.Copy(xs, 0, ptrx, xs.Length);
+
+  add(ptrx, ptry);
+
+  IS.Marshal.Copy(ptry, ys, 0, ys.Length);
+
+  // release protect
+  IS.Marshal.FreeCoTaskMem(ptrx);
+  IS.Marshal.FreeCoTaskMem(ptry);
+
+}
 
 ShowArray("xs", xs);
 ShowArray("ys", ys);
 
 // run native
-{
-
-  // protect gc
-  System.IntPtr ptrx = IS.Marshal.AllocCoTaskMem(IS.Marshal.SizeOf(typeof(int)) * xs.Length);
-  IS.Marshal.Copy(xs, 0, ptrx, xs.Length);
-
-  System.IntPtr ptry = IS.Marshal.AllocCoTaskMem(IS.Marshal.SizeOf(typeof(int)) * ys.Length);
-  IS.Marshal.Copy(ys, 0, ptry, ys.Length);
-
-  add(xs, ys);
-  //Console.WriteLine($"x: {x}");
-
-  // release protect
-  IS.Marshal.FreeCoTaskMem(ptrx);
-  IS.Marshal.FreeCoTaskMem(ptry);
-}
+CallCppFunction(xs, ys);
 
 ShowArray("xs", xs);
 ShowArray("ys", ys);
