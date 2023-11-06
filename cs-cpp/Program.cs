@@ -1,30 +1,29 @@
-//using Wrapper;
+using IS = System.Runtime.InteropServices;
+
 
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
 
-//WrapperClass _wr = new WrapperClass();
-
-int[] xs = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+int[] xs = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, };
 int[] ys = new int[10];
 
-
-Console.Write($"xs: [ ");
-foreach (int i in xs)
+void ShowArray(in string name, in int[] xs)
 {
-  Console.Write($"{i}, ");
+  Console.Write($"{name}: [");
+  Array.ForEach(xs, i => Console.Write($"{i}, "));
+  Console.WriteLine("]");
 }
-Console.WriteLine($" ]");
 
 
+[IS.DllImport("native", EntryPoint = "add", CallingConvention = IS.CallingConvention.Cdecl, ExactSpelling = true)]
+static extern int add();
 
+ShowArray("xs", xs);
+ShowArray("ys", ys);
 
-Console.Write($"ys: [ ");
-foreach (var i in ys)
-{
-  Console.Write($"{i}, ");
-}
-Console.WriteLine($" ]");
+// run native
+var x = add();
+Console.WriteLine($"x: {x}");
 
-var x = CsBindgen.NativeMethods.add(10, 10);
-Console.WriteLine($"x = {x}");
+ShowArray("xs", xs);
+ShowArray("ys", ys);
