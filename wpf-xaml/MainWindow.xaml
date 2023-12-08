@@ -7,6 +7,28 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <StackPanel>
+            <Label Height="30"/>
+            <TextBox Height="30"/>
+            <TextBox Height="30"/>
+            <Button Height="30"/>
+            <StackPanel
+                Orientation="Horizontal"
+                Height="100"
+                Margin="10">
+                <Label Height="30" Width="100"/>
+                <TextBox Height="30" Width="100"/>
+                <TextBox Height="30" Width="100"/>
+                <Button Height="30" Width="100"/>
+            </StackPanel>
+            <StackPanel 
+                VerticalAlignment="Center"
+                HorizontalAlignment="Stretch"
+                Margin="10,20,30,40">
+                <Label Content="enable text"/>
+                <TextBox Text="0000"/>
+                <Button Content="Button"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
